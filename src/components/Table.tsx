@@ -3,9 +3,9 @@ import DataContext from '../context/DataContext';
 import Loading from './Loading';
 
 function Table() {
-  const { dataPlanets } = useContext(DataContext);
+  const { filteredPlanets } = useContext(DataContext);
 
-  if (!dataPlanets.length) {
+  if (!filteredPlanets.length) {
     return (
       <Loading />
     );
@@ -16,7 +16,7 @@ function Table() {
       <thead>
         <tr>
           {
-            dataPlanets.length > 0 && Object.keys(dataPlanets[0]).map((key) => (
+            filteredPlanets.length > 0 && Object.keys(filteredPlanets[0]).map((key) => (
               <th key={ key }>{key}</th>
             ))
           }
@@ -24,7 +24,7 @@ function Table() {
       </thead>
       <tbody>
         {
-          dataPlanets.length > 0 && dataPlanets.map((planet, index) => (
+          filteredPlanets.length > 0 && filteredPlanets.map((planet, index) => (
             <tr key={ index }>
               {Object.values(planet).map((value, i) => (
                 <td key={ i }>{value}</td>

@@ -4,7 +4,8 @@ import { ChildrenProp, Planet } from '../types';
 import DataContext from './DataContext';
 
 function DataProvider({ children }: ChildrenProp) {
-  const [dataPlanets, setDataPlanets] = useState([]);
+  const [dataPlanets, setDataPlanets] = useState<Planet[]>([]);
+  const [filteredPlanets, setFilteredPlanets] = useState<Planet[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -15,6 +16,7 @@ function DataProvider({ children }: ChildrenProp) {
           return item;
         });
         setDataPlanets(restructuredData);
+        setFilteredPlanets(restructuredData);
       } catch (error) {
         console.log(error);
       }
@@ -22,8 +24,14 @@ function DataProvider({ children }: ChildrenProp) {
     fetchData();
   }, []);
 
+  const returnValue = {
+    dataPlanets,
+    setFilteredPlanets,
+    filteredPlanets,
+  };
+
   return (
-    <DataContext.Provider value={ { dataPlanets } }>
+    <DataContext.Provider value={ returnValue }>
       { children }
     </DataContext.Provider>
   );

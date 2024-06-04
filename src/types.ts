@@ -23,4 +23,8 @@ export type Planet = {
 
 export type DataContextType = {
   dataPlanets: Planet[];
+  setFilteredPlanets: (
+    React.Dispatch<React.SetStateAction<Planet[]>>
+  );
+  filteredPlanets: Planet[];
 };
