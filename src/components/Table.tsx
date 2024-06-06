@@ -50,7 +50,7 @@ function Table() {
       </thead>
       <tbody>
         {
-          filteredPlanets.length > 0 && filteredPlanets.map((planet, index) => (
+          filteredPlanets.map((planet, index) => (
             <tr key={ index }>
               {Object.values(planet).map((value, i) => (
                 <td key={ i }>{value}</td>
