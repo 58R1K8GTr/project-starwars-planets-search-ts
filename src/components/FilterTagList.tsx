@@ -15,7 +15,7 @@ function FilterTagList() {
         <FilterTag
           filter={ filter }
           handleClick={ handleClick }
-          key={ Object.keys(filter).join(' ') }
+          key={ Object.values(filter).join(' ') }
         />
       );
     })

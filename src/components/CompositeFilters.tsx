@@ -27,6 +27,12 @@ function CompositeFilters() {
     setRelationalOperator(value);
   };
 
+  const resetInputs = () => {
+    setInputValue('0');
+    setColumnValue('population');
+    setRelationalOperator('maior que');
+  };
+
   const columnProps = [
     ['column-filter', 'column', 'column-filter', columnValue],
     [
@@ -78,12 +84,17 @@ function CompositeFilters() {
       />
       <button
         data-testid="button-filter"
-        onClick={ () => handleClick({
-          column: columnValue,
-          relationalOperator,
-          value: inputValue,
-          id: filters.length + 1,
-        }) }
+        onClick={ () => {
+          handleClick({
+            column: columnValue,
+            relationalOperator,
+            value: inputValue,
+            id: filters.length > 0
+              ? filters[filters.length - 1].id + 1
+              : 1,
+          });
+          resetInputs();
+        } }
       >
         adicionar filtro
       </button>
