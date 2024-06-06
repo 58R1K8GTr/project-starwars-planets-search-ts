@@ -9,6 +9,20 @@ function CompositeFilters() {
   const [relationalOperator, setRelationalOperator] = useState('maior que');
   const { handleClick, filters } = useContext(DataContext);
 
+  function updateColumnValues(newValue: string | undefined = undefined) {
+    const removeItensColumn = filters.map((item) => item.column);
+    if (newValue) {
+      removeItensColumn.push(newValue);
+    }
+    return [
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ].filter((item) => !removeItensColumn.includes(item));
+  }
+
   const handleInput = (
     { target: { value } }: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -27,21 +41,9 @@ function CompositeFilters() {
     setRelationalOperator(value);
   };
 
-  const resetInputs = () => {
-    setInputValue('0');
-    setColumnValue('population');
-    setRelationalOperator('maior que');
-  };
-
   const columnProps = [
     ['column-filter', 'column', 'column-filter', columnValue],
-    [
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water',
-    ],
+    updateColumnValues(),
   ];
 
   const relationalOperatorsProps = [
@@ -61,6 +63,13 @@ function CompositeFilters() {
     idNameDataTestIdInput,
     idNameDataTestIdInput,
   ];
+
+  const resetInputs = () => {
+    setInputValue('0');
+    const columnValues = updateColumnValues(columnValue);
+    setColumnValue(columnValues.length > 0 ? columnValues[0] : '');
+    setRelationalOperator('maior que');
+  };
 
   return (
     <div>
@@ -83,6 +92,7 @@ function CompositeFilters() {
         handleChange={ handleInput }
       />
       <button
+        disabled={ filters.length === 5 }
         data-testid="button-filter"
         onClick={ () => {
           handleClick({
