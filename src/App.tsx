@@ -1,14 +1,20 @@
-import React from 'react';
 import './App.css';
+import { useContext } from 'react';
 import Table from './components/Table';
-import Filter from './components/Filter';
+import NameFilter from './components/NameFilter';
+import CompositeFilters from './components/CompositeFilters';
+import FilterTagList from './components/FilterTagList';
+import DataContext from './context/DataContext';
 
 function App() {
+  const { filters } = useContext(DataContext);
   return (
-    <>
-      <Filter />
+    <div>
+      <NameFilter />
+      <CompositeFilters />
+      { filters.length > 0 && <FilterTagList /> }
       <Table />
-    </>
+    </div>
   );
 }
 

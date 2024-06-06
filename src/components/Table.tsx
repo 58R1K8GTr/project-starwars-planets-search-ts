@@ -1,11 +1,37 @@
-import React, { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import DataContext from '../context/DataContext';
 import Loading from './Loading';
+import { Planet, RelationalOperatorsType } from '../types';
 
 function Table() {
-  const { filteredPlanets } = useContext(DataContext);
+  const [loading, setLoading] = useState(true);
+  const {
+    dataPlanets,
+    setFilteredPlanets,
+    filteredPlanets,
+    filters,
+  } = useContext(DataContext);
 
-  if (!filteredPlanets.length) {
+  useEffect(() => {
+    if (dataPlanets.length === 0) return;
+    const relationalOperators: RelationalOperatorsType = {
+      'maior que': (value1: number, value2: number) => value1 > value2,
+      'menor que': (value1: number, value2: number) => value1 < value2,
+      'igual a': (value1: number, value2: number) => value1 === value2,
+    };
+    const newPlanets = filters.reduce<Planet[]>((acc, curr) => {
+      const { column, relationalOperator, value } = curr;
+      return acc.filter(
+        (planet) => relationalOperators[
+          relationalOperator
+        ](Number(planet[column as keyof Planet]), Number(value)),
+      );
+    }, dataPlanets);
+    setFilteredPlanets(newPlanets);
+    setLoading(false);
+  }, [filters, dataPlanets, setFilteredPlanets]);
+
+  if (loading) {
     return (
       <Loading />
     );
