@@ -4,7 +4,10 @@ function FilterTag({ filter, handleClick }: FilterTagProp) {
   const { column, relationalOperator, value, id } = filter;
   const tagName = `${column} ${relationalOperator} ${value}`;
   return (
-    <div className="horizontal">
+    <div
+      className="horizontal"
+      data-testid="filter"
+    >
       <span>{ tagName }</span>
       <button
         onClick={ () => handleClick(id) }

@@ -5,6 +5,7 @@ import NameFilter from './components/NameFilter';
 import CompositeFilters from './components/CompositeFilters';
 import FilterTagList from './components/FilterTagList';
 import DataContext from './context/DataContext';
+import RemoveFilters from './components/RemoveFilters';
 
 function App() {
   const { filters } = useContext(DataContext);
@@ -12,7 +13,10 @@ function App() {
     <div>
       <NameFilter />
       <CompositeFilters />
-      { filters.length > 0 && <FilterTagList /> }
+      <div>
+        { filters.length > 0 && <FilterTagList /> }
+        <RemoveFilters />
+      </div>
       <Table />
     </div>
   );
