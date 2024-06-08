@@ -7,9 +7,9 @@ export function sortData(data: Planet[], sort: ColumnSort) {
     const firstValue = Number(first[column as keyof Planet]);
     const secondValue = Number(second[column as keyof Planet]);
 
-    if (sortOrder === 'ASC') {
-      return firstValue - secondValue;
-    }
-    return secondValue - firstValue;
+    if (Number.isNaN(firstValue)) return 1;
+    if (Number.isNaN(secondValue)) return -1;
+
+    return sortOrder === 'ASC' ? firstValue - secondValue : secondValue - firstValue;
   });
 }
