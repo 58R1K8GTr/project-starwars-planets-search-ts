@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import Selection from './Selection';
+import Select from './Select';
 import Input from './Input';
 import DataContext from '../context/DataContext';
 
@@ -73,13 +73,13 @@ function CompositeFilters() {
 
   return (
     <div>
-      <Selection
+      <Select
         properties={ columnProps[0] }
         values={ columnProps[1] }
         texts={ columnProps[1] }
         handleChange={ handleChangeColumn }
       />
-      <Selection
+      <Select
         properties={ relationalOperatorsProps[0] }
         values={ relationalOperatorsProps[1] }
         texts={ relationalOperatorsProps[1] }

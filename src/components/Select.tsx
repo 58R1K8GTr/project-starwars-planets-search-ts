@@ -1,6 +1,6 @@
 import { SelectionProp } from '../types';
 
-function Selection(
+function Select(
   { properties, values, texts, handleChange }: SelectionProp,
 ) {
   const [dataTestId, name, id, selectedOption] = properties;
@@ -26,4 +26,4 @@ function Selection(
   );
 }
 
-export default Selection;
+export default Select;

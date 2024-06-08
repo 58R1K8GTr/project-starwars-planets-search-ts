@@ -7,7 +7,12 @@ function DataProvider({ children }: ChildrenProp) {
   const [dataPlanets, setDataPlanets] = useState<Planet[]>([]);
   const [filteredPlanets, setFilteredPlanets] = useState<Planet[]>([]);
   const [filters, setFilters] = useState<FilterType[]>([]);
+  const [columnSort, setColumnSort] = useState(
+    { order: { column: 'population', sort: 'ASC' } },
+  );
 
+  // esse handleClick não deveria ficar aqui, só percebi isso depois.
+  // depois refatoro.
   const handleClick = (newFilter: FilterType) => {
     setFilters((prevState) => [...prevState, newFilter]);
   };
@@ -36,6 +41,8 @@ function DataProvider({ children }: ChildrenProp) {
     filters,
     handleClick,
     setFilters,
+    columnSort,
+    setColumnSort,
   };
 
   return (
