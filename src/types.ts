@@ -21,6 +21,13 @@ export type Planet = {
   url: string;
 };
 
+export type ColumnSort = {
+  order: {
+    column: string,
+    sort: string,
+  }
+};
+
 export type DataContextType = {
   dataPlanets: Planet[];
   setFilteredPlanets: (
@@ -30,6 +37,13 @@ export type DataContextType = {
   handleClick: (newFilter: FilterType) => void;
   filters: FilterType[];
   setFilters: React.Dispatch<React.SetStateAction<FilterType[]>>;
+  columnSort: ColumnSort;
+  setColumnSort: React.Dispatch<React.SetStateAction<{
+    order: {
+      column: string;
+      sort: string;
+    };
+  }>>;
 };
 
 export type SelectionProp = {

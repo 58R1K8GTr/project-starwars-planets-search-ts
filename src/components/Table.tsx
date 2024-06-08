@@ -29,7 +29,7 @@ function Table() {
     }, dataPlanets);
     setFilteredPlanets(newPlanets);
     setLoading(false);
-  }, [filters, dataPlanets, setFilteredPlanets]);
+  }, [filters, dataPlanets]);
 
   if (loading) {
     return (
@@ -42,7 +42,7 @@ function Table() {
       <thead>
         <tr>
           {
-            filteredPlanets.length > 0 && Object.keys(filteredPlanets[0]).map((key) => (
+            Object.keys(filteredPlanets[0]).map((key) => (
               <th key={ key }>{key}</th>
             ))
           }
@@ -50,10 +50,16 @@ function Table() {
       </thead>
       <tbody>
         {
+          // sortData(filteredPlanets, columnSort).map((planet, index) => (
           filteredPlanets.map((planet, index) => (
             <tr key={ index }>
               {Object.values(planet).map((value, i) => (
-                <td key={ i }>{value}</td>
+                <td
+                  key={ i }
+                  data-testid={ i === 0 ? 'planet-name' : '' }
+                >
+                  {value}
+                </td>
               ))}
             </tr>
           ))
