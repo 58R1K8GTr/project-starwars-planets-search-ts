@@ -28,7 +28,8 @@ function CompositeSort() {
 
   const handleClick = () => {
     setFilteredPlanets((prevState) => {
-      return sortData(prevState, columnSort);
+      const sortedData = sortData(prevState, columnSort);
+      return [...sortedData];
     });
   };
 
